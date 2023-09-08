@@ -8,6 +8,8 @@ function setup_pScope(pScope){
   pScope.draw_layer_boundaries(true); //remove boundary layers, true or false 
   pScope.set_direction(CCW); //  Counter Clock Wise or Clock Wise. Affects how it spins.
   pScope.set_slice_count(SLICE_COUNT);
+
+  pScope.load_image_sequence("tiki_test", "png", 10)
 }
 
 function setup_layers(pScope){
@@ -23,7 +25,19 @@ function setup_layers(pScope){
   let layer2 = new PLayer(squares);
   layer2.mode( RING ); // i think the ring moves in a ring-like shape. idk
   layer2.set_boundary( 0, 400 );
+
+  let tikisequence = new PLayer(tiki);
+  tikisequence.mode( RING );
+  tikisequence.set_boundary( 0, 200 );
 }
+
+function tiki(x, y, animation, pScope){
+
+  scale(1);
+ pScope.draw_image_from_sequence("tiki_test", 0, -150, animation.frame);
+
+}
+
 
 function faces(x, y, animation, pScope){ // emitting this affects the animation and makes it a swirl instead for some odd reason.
   
