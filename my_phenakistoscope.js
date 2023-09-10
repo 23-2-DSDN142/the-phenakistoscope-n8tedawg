@@ -8,8 +8,9 @@ function setup_pScope(pScope){
   pScope.draw_layer_boundaries(true); //remove boundary layers, true or false 
   pScope.set_direction(CCW); //  Counter Clock Wise or Clock Wise. Affects how it spins.
   pScope.set_slice_count(SLICE_COUNT);
-
-  pScope.load_image_sequence("tiki_test", "png", 10)
+  pScope.load_image("tiki_test_0" , "png");
+ // pScope.load_image_sequence("tiki_test", "png", 1)
+  //pScope.load_image("tiki_explode_0" , "png");
 }
 
 function setup_layers(pScope){
@@ -33,9 +34,10 @@ function setup_layers(pScope){
 
 function tiki(x, y, animation, pScope){
 
-  scale(1);
- pScope.draw_image_from_sequence("tiki_test", 0, -150, animation.frame);
-
+  scale(0.1);
+ //pScope.draw_image_from_sequence("tiki_test", 0, -150, animation.frame);
+ pScope.draw_image("tiki_test_0",x,-5000);
+ //pScope.draw_image("tiki_explode_0",x,100);
 }
 
 
