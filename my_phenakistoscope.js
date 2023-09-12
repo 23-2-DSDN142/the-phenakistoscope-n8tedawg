@@ -3,7 +3,7 @@ const SLICE_COUNT = 12;//(Min 6, Max 18, recommended 10)
 
 function setup_pScope(pScope){
   //pScope.output_mode(STATIC_DISK);// change the mode using the setting
-  pScope.output_mode(ANIMATED_DISK);
+  pScope.output_mode(STATIC_DISK);
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(true); //remove boundary layers, true or false 
   pScope.set_direction(CCW); //  Counter Clock Wise or Clock Wise. Affects how it spins.
@@ -21,7 +21,7 @@ function setup_layers(pScope){
   let layer1 = new PLayer(mushroom_clouds);// insert to faces the function you are using
   layer1.mode( SWIRL(1) ); // number determines how many of the object show on each slice. SWIRL goes out from the middle, towards the end
   //number technically means how many swirls it needs to complete
-  layer1.set_boundary( 600, 1000 ); // the first number talks about the length from the origin and where the object starts.
+  layer1.set_boundary( 600, 1100 ); // the first number talks about the length from the origin and where the object starts.
   // second number talks about how far it goes from the origin to the edge of the radius.
 
   //let layer2 = new PLayer(squares);
@@ -54,10 +54,11 @@ function mushroom_clouds(x, y, animation, pScope){ // emitting this affects the 
   //scale(animation.wave*2) // oddly makes the face repeat multiple times
   // making this animation.frame says to the code "from the origin, start at 0 and when you reach the end, make them a size of 1"
   // you can add scale(n), n = the size of all the faces.
+  //scale(1);
 
   strokeWeight(0)
   fill(255, 195, 15)
-  rect(-25,-20,50,200) // neck of the cloud
+  rect(-25,-20,50,70) // neck of the cloud
 
   strokeWeight(0)
   fill(252, 136, 3)
@@ -67,6 +68,9 @@ function mushroom_clouds(x, y, animation, pScope){ // emitting this affects the 
   ellipse (35,-20,60,60); //right cloud
   ellipse (0,-50,60,60); //middle cloud
   
+  strokeWeight(0) // inbetween circles that cover up the lines
+  ellipse(17.5,-35,40,40); // circle inbetween left and middle cloud
+  ellipse(-17.5,-35,40,40); // circle inbetween middle and right cloud
   //strokeWeight(1)
   
 
@@ -80,24 +84,24 @@ function mushroom_clouds(x, y, animation, pScope){ // emitting this affects the 
 
 }
 
-//function squares(x, y, animation, pScope){
+function squares(x, y, animation, pScope){
 
   // this is how you set up a background for a specific layer
- // let angleOffset = (360 / SLICE_COUNT) / 2
- // let backgroundArcStart = 270 - angleOffset;
- // let backgroundArcEnd = 270 + angleOffset;
+  let angleOffset = (360 / SLICE_COUNT) / 2
+  let backgroundArcStart = 270 - angleOffset;
+  let backgroundArcEnd = 270 + angleOffset;
 
   // draws the inside circle
- // fill(200, 135, 245) // colour of innner circle
- // arc(x,y,400,400,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
+  fill(200, 135, 245) // colour of innner circle
+  arc(x,y,400,400,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
   // changing the number changes the size of the inner circle.
 
   // draws the small white squares in the inside circle
- // fill(255)
- // rect(-30,-300-animation.wave()*50,70,70) // .wave is a cosine wave btw
+  fill(255)
+  rect(-30,-300-animation.wave()*50,70,70) // .wave is a cosine wave btw
   //ellipse(-10,-300-animation.wave()*50,70,70)
   // number multiplied to animation.wave determines how fast and far it moves
   // second to last number is how far it stretches out horizontally
   // last number is how far it stretches out vertically
-//}
+}
 
