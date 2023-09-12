@@ -18,10 +18,10 @@ function setup_layers(pScope){
 
   new PLayer(null, 242, 221, 150);  //lets us draw the whole circle background, ignoring the boundaries. the second number value determines colour.
 
-  let layer1 = new PLayer(circles);// insert to faces the function you are using
+  let layer1 = new PLayer(mushroom_clouds);// insert to faces the function you are using
   layer1.mode( SWIRL(1) ); // number determines how many of the object show on each slice. SWIRL goes out from the middle, towards the end
   //number technically means how many swirls it needs to complete
-  layer1.set_boundary( 350, 900 ); // the first number talks about the length from the origin and where the object starts.
+  layer1.set_boundary( 600, 1000 ); // the first number talks about the length from the origin and where the object starts.
   // second number talks about how far it goes from the origin to the edge of the radius.
 
   //let layer2 = new PLayer(squares);
@@ -31,6 +31,7 @@ function setup_layers(pScope){
   let tikisequence = new PLayer(tiki);
   tikisequence.mode( RING );
   tikisequence.set_boundary( 0, 200 );
+  //first number determines the length from the origin. The second number talks about how far it goes from origin to edge of circle
 }
 
 // THE TIKI EXPLODING
@@ -47,19 +48,36 @@ function tiki(x, y, animation, pScope){
 }
 
 
-function circles(x, y, animation, pScope){ // emitting this affects the animation and makes it a swirl instead for some odd reason.
+function mushroom_clouds(x, y, animation, pScope){ // emitting this affects the animation and makes it a swirl instead for some odd reason.
   
-  scale(animation.frame);// emitting this affects the animation and makes it a swirl instead for some odd reason.
+  scale(animation.frame*3);// emitting this affects the animation and makes it a swirl instead for some odd reason.
   //scale(animation.wave*2) // oddly makes the face repeat multiple times
   // making this animation.frame says to the code "from the origin, start at 0 and when you reach the end, make them a size of 1"
   // you can add scale(n), n = the size of all the faces.
 
-  fill(56, 78, 91)
-  ellipse(0,0,50,50); // draw head
-  fill(0);
-  // ellipse(-10,-10,10,10); //draw eye
-  // ellipse(10,-10,10,10); // draw eye
-  // arc(0,10,20,10,0,180); // draw mouth
+  strokeWeight(0)
+  fill(255, 195, 15)
+  rect(-25,-20,50,200) // neck of the cloud
+
+  strokeWeight(0)
+  fill(252, 136, 3)
+  ellipse (-35,-20,60,60); //left cloud
+  //first number moves it left if negative and right if positive
+  //second number moves it up negative and down positive
+  ellipse (35,-20,60,60); //right cloud
+  ellipse (0,-50,60,60); //middle cloud
+  
+  //strokeWeight(1)
+  
+
+  // noFill();
+  // beginShape();
+  // vertex(x,y);
+  // bezierVertex();
+  // endShape();
+
+  
+
 }
 
 //function squares(x, y, animation, pScope){
