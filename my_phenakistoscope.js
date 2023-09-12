@@ -2,28 +2,32 @@ const SLICE_COUNT = 12;//(Min 6, Max 18, recommended 10)
 // This changes how many slices the phenakistoscope has. More slices means it will move slower.
 
 function setup_pScope(pScope){
-  //pScope.output_mode(STATIC_DISK);// change the mode using the setting
+  //pScope.output_mode(ANIMATED_DISK);// change the mode using the setting
   pScope.output_mode(STATIC_DISK);
   pScope.scale_for_screen(true);
-  pScope.draw_layer_boundaries(true); //remove boundary layers, true or false 
+  pScope.draw_layer_boundaries(false); //remove boundary layers, true or false 
   pScope.set_direction(CCW); //  Counter Clock Wise or Clock Wise. Affects how it spins.
   pScope.set_slice_count(SLICE_COUNT);
   //pScope.load_image("tiki_test_0" , "png"); //big design
   //pScope.load_image_sequence("tiki_test", "png", 1)
   pScope.load_image_sequence("tiki_explode", "png", 12);
-  pScope.load_image("flower_lei" , "png");
+  pScope.load_image("less_flowers_lei" , "png");
   //pScope.load_image("tiki_explode_0" , "png"); //smaller design
 }
 
 function setup_layers(pScope){
 
-  new PLayer(null, 242, 221, 150);  //lets us draw the whole circle background, ignoring the boundaries. the second number value determines colour.
+  new PLayer(null, 69, 78, 82);  //lets us draw the whole circle background, ignoring the boundaries. the second number value determines colour.
 
 //  let boom = new PLayer(mushroom_clouds);// insert to faces the function you are using
 //  boom.mode( SWIRL(1) ); // number determines how many of the object show on each slice. SWIRL goes out from the middle, towards the end
   //number technically means how many swirls it needs to complete
 //  boom.set_boundary( 600, 1100 ); // the first number talks about the length from the origin and where the object starts.
   // second number talks about how far it goes from the origin to the edge of the radius.
+
+  let volcanocircle = new PLayer(volcanohole);
+  volcanocircle.mode(RING);
+  volcanocircle.set_boundary(0,0);
 
   let garland = new PLayer(flowers);
   garland.mode( SWIRL(1) );
@@ -33,14 +37,15 @@ function setup_layers(pScope){
   //layer2.mode( RING ); // i think the ring moves in a ring-like shape. idk
   //layer2.set_boundary( 0, 400 );
 
+  let eruption = new PLayer(molten);
+  eruption.mode( SWIRL(2) );
+  eruption.set_boundary( 500, 1600 );
+
   let tikisequence = new PLayer(tiki);
   tikisequence.mode( RING );
   tikisequence.set_boundary( 0, 200 );
   //first number determines the length from the origin. The second number talks about how far it goes from origin to edge of circle
 
-  let eruption = new PLayer(molten);
-  eruption.mode( SWIRL(3) );
-  eruption.set_boundary( 600, 1400 );
 }
 
 // THE TIKI EXPLODING
@@ -98,14 +103,35 @@ function flowers(x, y, animation, pScope){
   push()
   scale(1.4)
   if(animation.frame ==0){
-    pScope.draw_image("flower_lei",x,y);
+    pScope.draw_image("less_flowers_lei",x,y);
   }
   pop()
 
   push()
-  scale(0.65)
+  scale(2.5)
   if(animation.frame ==0){
-    pScope.draw_image("flower_lei",x,y);
+    pScope.draw_image("less_flowers_lei",x,y);
+  }
+  pop()
+
+  push()
+  scale(5)
+  if(animation.frame ==0){
+    pScope.draw_image("less_flowers_lei",x,y);
+  }
+  pop()
+
+  push()
+  scale(0.7)
+  if(animation.frame ==0){
+    pScope.draw_image("less_flowers_lei",x,y);
+  }
+  pop()
+
+  push()
+  scale(0.3)
+  if(animation.frame ==0){
+    pScope.draw_image("less_flowers_lei",x,y);
   }
   pop()
 }
@@ -139,20 +165,70 @@ function molten(x, y, animation, pScope){
   scale (animation.frame*3);
 
   strokeWeight(0)
-  fill(252, 136, 3)
-  ellipse(0,0,60,100);
+  fill(240, 91, 35)
+  ellipse(0,15,60,60);
   //quad(moltenX, moltenY, moltenX-45, moltenY+50, moltenX, moltenY+100, moltenX+45, moltenY+50);
-  triangle(moltenX, moltenY+100, moltenX-27, moltenY+50, moltenX+27, moltenY+50);
+  //fill(0,0,0);
+  triangle(moltenX, moltenY+100, moltenX-20, moltenY+40, moltenX+20, moltenY+40);
 
-  let moltenXL = -90
-  let moltenYL = 20
-  strokeWeight(0)
-  ellipse(moltenXL, moltenYL+26 ,60 ,100);
-  triangle(moltenXL, moltenYL+100, moltenXL-27, moltenYL+50, moltenXL+27, moltenYL+50);
+//  let moltenXL = -90
+//  let moltenYL = 20
+//  strokeWeight(0)
+//  rotate(-30);
+//  //fill(40,100,140); //blue
+//  ellipse(moltenXL, moltenYL+26 ,40 ,100);
+//  triangle(moltenXL, moltenYL+100, moltenXL-20, moltenYL+40, moltenXL+20, moltenYL+40);
+//
+//  let moltenXR = 90
+//  let moltenYR = 20
+//  strokeWeight(0)
+//  rotate(60);
+//  //fill(140,40,100); //purple
+//  ellipse(moltenXR, moltenYR+26 ,40 ,100);
+//  triangle(moltenXR, moltenYR+100, moltenXR-20, moltenYR+40, moltenXR+20, moltenYR+40);
 
-  let moltenXR = 90
-  let moltenYR = 20
-  strokeWeight(0)
-  ellipse(moltenXR, moltenYR+26 ,60 ,100);
-  triangle(moltenXR, moltenYR+100, moltenXR-27, moltenYR+50, moltenXR+27, moltenYR+50);
+//  fill(252,252,252);
+
+  let lavaX = 12
+  let lavaY = 3
+  beginShape();
+  vertex(lavaX-130,lavaY+25);
+  bezierVertex(lavaX-40, lavaY-25, lavaX-50, lavaY+80, lavaX-30, lavaY+85);
+  bezierVertex(lavaX-62, lavaY+70, lavaX-42, lavaY+57, lavaX-130, lavaY+37);
+  endShape();
+  ellipse(lavaX-127, lavaY+31, lavaX+10, lavaY+9);
+//  triangle(-20,120, -90, 60, -50, 40);
+
+  let lavaXR = -12
+  let lavaYR = 3
+
+  beginShape();
+  vertex(lavaXR+130,lavaYR+25);
+  bezierVertex(lavaXR+40, lavaYR-25, lavaXR+50, lavaYR+80, lavaXR+30, lavaYR+85);
+  bezierVertex(lavaXR+62, lavaYR+70, lavaXR+42, lavaYR+57, lavaXR+130, lavaYR+37);
+  endShape();
+  ellipse(lavaXR+127, lavaYR+31, lavaXR+34, lavaYR+9);
+
+  let lavacirclesX = 0
+  let lavacirclesY = 0
+
+  //fill(0,0,0);
+  ellipse(lavacirclesX-40, lavacirclesY+35, 70, 70);
+  ellipse(lavacirclesX+40, lavacirclesY+35, 70, 70);
+
+  let spikeNeckX = 0
+  let spikeNeckY = 0
+
+  triangle(spikeNeckX-100,spikeNeckY+40,spikeNeckX-10,spikeNeckY+70,spikeNeckX-30,spikeNeckY+125); //left part of eruption
+  triangle(spikeNeckX+100,spikeNeckY+40,spikeNeckX+10,spikeNeckY+70,spikeNeckX+30,spikeNeckY+125); //right park of eruption
+  triangle(spikeNeckX-70,spikeNeckY+40,spikeNeckX,spikeNeckY+140,spikeNeckX+70,spikeNeckY+40); //middle park of the eruption
+
+
+  
+}
+
+function volcanohole(x, y, animation, pScope){
+  fill(252,70,0);
+  ellipse(0,0,250,250);
+
 }
