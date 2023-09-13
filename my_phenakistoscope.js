@@ -129,7 +129,7 @@ function flowers(x, y, animation, pScope){
   pop()
 
   push()
-  scale(0.3)
+  scale(0)
   if(animation.frame ==0){
     pScope.draw_image("less_flowers_lei",x,y);
   }
