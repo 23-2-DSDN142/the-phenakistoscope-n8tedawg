@@ -2,8 +2,8 @@ const SLICE_COUNT = 12;//(Min 6, Max 18, recommended 10)
 // This changes how many slices the phenakistoscope has. More slices means it will move slower.
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);// change the mode using the setting
-  //pScope.output_mode(STATIC_DISK);
+  //pScope.output_mode(ANIMATED_DISK);// change the mode using the setting
+  pScope.output_mode(STATIC_DISK);
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false); //remove boundary layers, true or false 
   pScope.set_direction(CCW); //  Counter Clock Wise or Clock Wise. Affects how it spins.
@@ -101,7 +101,7 @@ function tiki(x, y, animation, pScope){
 
 function flowers(x, y, animation, pScope){
   push()
-  scale(1.3) // the middle lei from the origin
+  scale(1.4) // the middle lei from the origin
   if(animation.frame ==0){
     pScope.draw_image("yellow_flowers_lei",x,y);
   }
