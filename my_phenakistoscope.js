@@ -2,8 +2,8 @@ const SLICE_COUNT = 12;//(Min 6, Max 18, recommended 10)
 // This changes how many slices the phenakistoscope has. More slices means it will move slower.
 
 function setup_pScope(pScope){
-  //pScope.output_mode(ANIMATED_DISK);// change the mode using the setting
-  pScope.output_mode(STATIC_DISK);
+  pScope.output_mode(ANIMATED_DISK);// change the mode using the setting
+  //pScope.output_mode(STATIC_DISK);
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false); //remove boundary layers, true or false 
   pScope.set_direction(CCW); //  Counter Clock Wise or Clock Wise. Affects how it spins.
@@ -11,7 +11,7 @@ function setup_pScope(pScope){
   //pScope.load_image("tiki_test_0" , "png"); //big design
   //pScope.load_image_sequence("tiki_test", "png", 1)
   pScope.load_image_sequence("tiki_explode", "png", 12);
-  pScope.load_image("less_flowers_lei" , "png");
+  pScope.load_image("yellow_flowers_lei" , "png");
   //pScope.load_image("tiki_explode_0" , "png"); //smaller design
 }
 
@@ -29,7 +29,7 @@ function setup_layers(pScope){
   volcanocircle.mode(RING);
   volcanocircle.set_boundary(0,0);
 
-  let garland = new PLayer(flowers);
+  let garland = new PLayer(flowers); //the yellow flowers lei function
   garland.mode( SWIRL(1) );
   garland.set_boundary( 0, 300 );
 
@@ -38,7 +38,7 @@ function setup_layers(pScope){
   //layer2.set_boundary( 0, 400 );
 
   let eruption = new PLayer(molten);
-  eruption.mode( SWIRL(2) );
+  eruption.mode( SWIRL(3) );
   eruption.set_boundary( 500, 1600 );
 
   let tikisequence = new PLayer(tiki);
@@ -101,30 +101,30 @@ function tiki(x, y, animation, pScope){
 
 function flowers(x, y, animation, pScope){
   push()
-  scale(1.4)
+  scale(1.3) // the middle lei from the origin
   if(animation.frame ==0){
-    pScope.draw_image("less_flowers_lei",x,y);
+    pScope.draw_image("yellow_flowers_lei",x,y);
   }
   pop()
 
   push()
-  scale(2.5)
+  scale(2.5) //furtherest from the origin
   if(animation.frame ==0){
-    pScope.draw_image("less_flowers_lei",x,y);
+    pScope.draw_image("yellow_flowers_lei",x,y);
   }
   pop()
 
-  push()
+  push() //closest to the origin
   scale(0.7)
   if(animation.frame ==0){
-    pScope.draw_image("less_flowers_lei",x,y);
+    pScope.draw_image("yellow_flowers_lei",x,y);
   }
   pop()
 
   push()
   scale(0)
   if(animation.frame ==0){
-    pScope.draw_image("less_flowers_lei",x,y);
+    pScope.draw_image("yellow_flowers_lei",x,y);
   }
   pop()
 }
@@ -150,7 +150,7 @@ function squares(x, y, animation, pScope){
   // last number is how far it stretches out vertically
 }
 
-function molten(x, y, animation, pScope){
+function molten(x, y, animation, pScope){ // the lava itself
 
   let moltenX = 0
   let moltenY = -26
