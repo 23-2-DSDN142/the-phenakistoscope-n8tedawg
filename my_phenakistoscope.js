@@ -115,13 +115,6 @@ function flowers(x, y, animation, pScope){
   pop()
 
   push()
-  scale(5)
-  if(animation.frame ==0){
-    pScope.draw_image("less_flowers_lei",x,y);
-  }
-  pop()
-
-  push()
   scale(0.7)
   if(animation.frame ==0){
     pScope.draw_image("less_flowers_lei",x,y);
@@ -162,11 +155,11 @@ function molten(x, y, animation, pScope){
   let moltenX = 0
   let moltenY = -26
 
-  scale (animation.frame*3);
+  scale (animation.frame*4);
 
   strokeWeight(0)
   fill(240, 91, 35)
-  ellipse(0,15,60,60);
+  ellipse(0,15,60,60); // middle of the lava
   //quad(moltenX, moltenY, moltenX-45, moltenY+50, moltenX, moltenY+100, moltenX+45, moltenY+50);
   //fill(0,0,0);
   triangle(moltenX, moltenY+100, moltenX-20, moltenY+40, moltenX+20, moltenY+40);
@@ -189,8 +182,8 @@ function molten(x, y, animation, pScope){
 
 //  fill(252,252,252);
 
-  let lavaX = 12
-  let lavaY = 3
+  let lavaX = 12 // 12
+  let lavaY = 3 // 3
   beginShape();
   vertex(lavaX-130,lavaY+25);
   bezierVertex(lavaX-40, lavaY-25, lavaX-50, lavaY+80, lavaX-30, lavaY+85);
@@ -199,8 +192,8 @@ function molten(x, y, animation, pScope){
   ellipse(lavaX-127, lavaY+31, lavaX+10, lavaY+9);
 //  triangle(-20,120, -90, 60, -50, 40);
 
-  let lavaXR = -12
-  let lavaYR = 3
+  let lavaXR = -12 // -12
+  let lavaYR = 3 // 3
 
   beginShape();
   vertex(lavaXR+130,lavaYR+25);
@@ -209,22 +202,30 @@ function molten(x, y, animation, pScope){
   endShape();
   ellipse(lavaXR+127, lavaYR+31, lavaXR+34, lavaYR+9);
 
-  let lavacirclesX = 0
-  let lavacirclesY = 0
+  let lavacirclesX = 0 //0
+  let lavacirclesY = 0 //0
+  let spikeNeckX = 0 //0
+  let spikeNeckY = 0 //0
 
   //fill(0,0,0);
   ellipse(lavacirclesX-40, lavacirclesY+35, 70, 70);
   ellipse(lavacirclesX+40, lavacirclesY+35, 70, 70);
 
-  let spikeNeckX = 0
-  let spikeNeckY = 0
-
+  fill(240, 91, 35);
   triangle(spikeNeckX-100,spikeNeckY+40,spikeNeckX-10,spikeNeckY+70,spikeNeckX-30,spikeNeckY+125); //left part of eruption
   triangle(spikeNeckX+100,spikeNeckY+40,spikeNeckX+10,spikeNeckY+70,spikeNeckX+30,spikeNeckY+125); //right park of eruption
   triangle(spikeNeckX-70,spikeNeckY+40,spikeNeckX,spikeNeckY+140,spikeNeckX+70,spikeNeckY+40); //middle park of the eruption
 
-
+  fill(240, 127, 35)
+  triangle(spikeNeckX-70,spikeNeckY+45,spikeNeckX-20,spikeNeckY+60,spikeNeckX-30,spikeNeckY+100); // left side shine of the lava
+  triangle(spikeNeckX+70,spikeNeckY+45,spikeNeckX+20,spikeNeckY+60,spikeNeckX+30,spikeNeckY+100); // right side shine of the lava
+  triangle(spikeNeckX-65,spikeNeckY+50,spikeNeckX,spikeNeckY+110,spikeNeckX+65,spikeNeckY+50);
   
+  fill(240, 127, 35)
+  ellipse(lavacirclesX-47, lavacirclesY+35, 50, 40); //left highlight
+  ellipse(lavacirclesX+47, lavacirclesY+35, 50, 40); //right highlight
+  ellipse(lavacirclesX+0,lavacirclesY+40,lavacirclesX+70,lavacirclesY+80)
+
 }
 
 function volcanohole(x, y, animation, pScope){
