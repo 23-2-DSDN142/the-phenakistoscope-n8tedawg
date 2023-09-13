@@ -1,7 +1,7 @@
-const SLICE_COUNT = 12; //(Minimum 6 slices, Max 18 slices, recommended 10 slices) 
+const SLICE_COUNT = 12; //(Minimum 6 slices, Maximum 18 slices, recommended 10 slices) 
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);// Change the mode to ANIMATED or STATIC
+  pScope.output_mode(STATIC_DISK);// Change the mode to ANIMATED or STATIC
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false); // Remove the boundary layers
   pScope.set_direction(CCW); // Affects how it spins Clockwise or Counter Clockwise
